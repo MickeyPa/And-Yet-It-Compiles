@@ -1,4 +1,5 @@
 import string
+import config
 class GameBoard:
     # emptyposition is a tuple containing the index values of the empty slot's position on the gameboard.
 
@@ -14,12 +15,28 @@ class GameBoard:
     # Example: position_map['A']=(0,0)
     position_map={a:b for a,b in zip([s for s in string.ascii_uppercase[0:24]],[(i,j) for i in range(0,3) for j in range(0,5)])}
 
-    def __init__(self,board=None,level=1):
-        if board is None:
-            self.board=self.randomize_board(level)
-        else:
-            self.board=board
-        self.empty_position==(0,0)
+    def __init__(self,board_string=None,level=1):
+        #if no string is provided, get random string
+        if board_string is None:
+            board_string=self.randomize_board_string(level)
 
-    def randomize_board(self,level):
-        pass
+
+        self.__create_board_from_string(board_string)
+
+
+
+    def randomize_board_string(self,level):
+        pieces=config.levels[level]
+
+    def __create_board_from_string(self,board_string):
+
+        #Create 3x5 empty board
+        self.board = [['e' for i in range(5)] for i in range(3)]
+
+        pieces=iter(board_string.replace(" ","")) #replace blank spaces with nothing and create an iterator
+
+        for i,row in enumerate(self.board):
+            for j,pos in enumerate(row):
+                self.board[i][j]=next(pieces)
+
+
