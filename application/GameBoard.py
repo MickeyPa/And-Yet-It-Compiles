@@ -1,5 +1,6 @@
 import string
 import config
+import random
 class GameBoard:
     # emptyposition is a tuple containing the index values of the empty slot's position on the gameboard.
 
@@ -27,6 +28,15 @@ class GameBoard:
 
     def randomize_board_string(self,level):
         pieces=config.levels[level]
+        board_string='e'
+        for piece, count in pieces.items():
+            board_string=board_string+piece*count
+        bs_list=list(board_string)
+        random.shuffle(bs_list)
+        return ''.join(bs_list)
+
+
+
 
     def __create_board_from_string(self,board_string):
 
