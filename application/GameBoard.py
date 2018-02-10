@@ -14,9 +14,9 @@ class GameBoard:
 
     # Maps position to indices
     # Example: position_map['A']=(0,0)
-    position_map={a:b for a,b in zip([s for s in string.ascii_uppercase[0:24]],[(i,j) for i in range(0,3) for j in range(0,5)])}
 
-
+    position_map = {a: b for a, b in
+                    zip([s for s in string.ascii_uppercase[0:24]], [(i, j) for i in range(0, 3) for j in range(0, 5)])}
 
     def __init__(self,board_string=None,level=1):
         #if no string is provided, get random string
@@ -143,7 +143,11 @@ class GameBoard:
         self.board[empty_position[0]][empty_position[1]] = self.board[new_position[0]][new_position[1]]
         self.board[new_position[0]][new_position[1]] = 'e'
 
+    # check goal state
+    def check_goal_state(self):
+        for x in range(0, 4):
+            if self.board[0][x] != self.board[2][x]:
+                return False
 
-
-
+        return True
 
