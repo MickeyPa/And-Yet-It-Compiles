@@ -10,9 +10,11 @@ body{
     align-items: center;
     justify-content: center;
 }
-.pieces{
-    fill:none;
-    stroke: black;
+.r-piece{
+    fill: #c24b31;
+}
+.r-bot{
+    fill: #aa422b;
 }
 #gameboard{
     display: flex;
