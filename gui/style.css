@@ -1,4 +1,28 @@
+html{
+    height: 100%;
+}
+body{
+    background: radial-gradient(circle, #8323f7, #33006b);
+    margin: 0px;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
 .pieces{
     fill:none;
     stroke: black;
+}
+#gameboard{
+    display: flex;
+    justify-content: center;
+}
+#gameboard svg{
+
+
+}
+#back{
+    display: flex;
+    justify-content: center;
 }

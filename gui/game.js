@@ -4,9 +4,9 @@ var dummy=[{'pos':[0,0],'piece':'a'},{'pos':[0,1],'piece':'b'},{'pos':[0,2],'pie
                 {'pos':[1,0],'piece':'f'},{'pos':[1,1],'piece':'g'},{'pos':[1,2],'piece':'h'},{'pos':[1,3],'piece':'i'},{'pos':[1,4],'piece':'j'},
                 {'pos':[2,0],'piece':'k'},{'pos':[2,1],'piece':'l'},{'pos':[2,2],'piece':'m'},{'pos':[2,3],'piece':'n'},{'pos':[2,4],'piece':'o'}]
 
-var margin = {top: 20, right: 40, bottom: 30, left: 20},
-            width = 500 - margin.left - margin.right,
-            height = 300 - margin.top - margin.bottom;
+var margin = {top: 0, right:0, bottom: 0, left: 0},
+            width =330 - margin.left - margin.right,
+            height = 210 - margin.top - margin.bottom;
 var x=d3.scaleLinear()
     .domain([0, 5])
     .range([30, width]);
@@ -35,20 +35,23 @@ function initGameBoard(data){
     var oned=function(i){
         return [Math.floor(i/5),i%5];
     }
-    var row=svg.selectAll("circle").data(data,d=>d.piece)
+    var row=svg.selectAll("rect").data(data,d=>d.piece)
  
     var row_update=row.transition()
-    .duration(750).attr("cx",(d,i)=>x(oned(i)[1]))
-        .attr("cy",(d,i)=>y(oned(i)[0]))
+    .duration(750).attr("x",(d,i)=>x(oned(i)[1]))
+        .attr("y",(d,i)=>y(oned(i)[0]))
         .attr("display",d=>d.piece=='e'?'none':'')
      
     var row_enter=row.enter()
-        .append("circle")
+        .append("rect")
         .attr("class", "pieces")
-        .attr("cx",(d,i)=>x(oned(i)[1]))
-        .attr("cy",(d,i)=>y(oned(i)[0]))
+        .attr("x",(d,i)=>x(oned(i)[1]))
+        .attr("y",(d,i)=>y(oned(i)[0]))
         .attr("display",d=>d.piece=='e'?'none':'')
-        .attr("r",30);
+        .attr("height",60)
+        .attr("width",60)
+        .attr("rx",18)
+        .attr("ry",18);
    
 
     console.log("done");
