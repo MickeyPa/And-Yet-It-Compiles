@@ -90,7 +90,7 @@ class GameBoard:
             # A,K,G
 
         elif empty_position == (1, 1):  # G
-            successors = [(), (), (), ()]
+            successors = [(0, 1), (1, 0), (1, 2), (2, 1)]
             # F,B,L,H
 
         elif empty_position == (1, 2):  # H
