@@ -5,7 +5,8 @@
   "devDependencies": {
     "d3": "^4.13.0",
     "electron": "1.8.2",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "python-shell": "0.4.0"
   },
   "scripts": {
     "start": "electron ."

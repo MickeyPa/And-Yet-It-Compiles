@@ -14,7 +14,24 @@ var y=d3.scaleLinear()
 var svg = d3.select("#gameboard").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-initGameBoard(dummy);
+
+
+var board=[];
+var PythonShell = require('python-shell');
+var pyshell = new PythonShell('candyCrisis.py', {pythonPath:'py', scriptPath: '../' });
+
+pyshell.on('message', function (message) {
+    if (message.substr(0, 2)=="['"){
+        message = message.replace(/'/g, '"');
+        JSON.parse(message).forEach(p => {
+            board.push([board.length,p])
+        });
+    }
+    if(board.length==15) initGameBoard(board);
+});
+
+
+
 
 
 function updateData(){
