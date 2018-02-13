@@ -53,10 +53,10 @@ class GameBoard:
 
 
     def get_empty_position(self):
-        for row in self.board:
-            for column in self.board[row]:
-                if self.board[row][column] == 'e':
-                    return (row,column)
+        for i, row in enumerate(self.board):
+            for j, col in enumerate(row):
+                if col == 'e':
+                    return (i, j)
 
 
 
