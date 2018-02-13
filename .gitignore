@@ -13,3 +13,4 @@ __pycache__/
 *$py.class
 /.idea
 /gui/node_modules
+/gui/.vscode
