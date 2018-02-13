@@ -1,6 +1,5 @@
 var d3 = require('d3');
 var $= require('jquery');
-var dummy = [['1','r'] ,['2','e'] ,['3','b'] ,['4','w'] ,['5','r'], ['6','b'] ,['7','b'] ,['8','b'] ,['9','r'] ,['10','r'] ,['11','r'] ,['12','b'] ,['13','r'] ,['14','b'] ,['15','w']]
 
 var margin = {top: 0, right:0, bottom: 0, left: 0},
             width =600 - margin.left - margin.right,
@@ -19,15 +18,16 @@ var svg = d3.select("#gameboard").append("svg")
 var board=[];
 var PythonShell = require('python-shell');
 var pyshell = new PythonShell('candyCrisis.py', {pythonPath:'py', scriptPath: '../' });
-
+var emptyPiece;
+var emptyPiecePos;
+var clickedPiece;
 pyshell.on('message', function (message) {
-    if (message.substr(0, 2)=="['"){
+    if (message.substr(0, 2)=="[["){
         message = message.replace(/'/g, '"');
-        JSON.parse(message).forEach(p => {
-            board.push([board.length,p])
-        });
+        board=JSON.parse(message)
+        initGameBoard(board);
     }
-    if(board.length==15) initGameBoard(board);
+    
 });
 
 
@@ -35,9 +35,7 @@ pyshell.on('message', function (message) {
 
 
 function updateData(){
-    var dummy = [['1', 'r'], ['7', 'b'], ['3', 'b'], ['4', 'w'], ['5', 'r'], ['6', 'b'], ['2', 'e'], ['8', 'b'], ['9', 'r'], ['10', 'r'], ['11', 'r'], ['12', 'b'], ['13', 'r'], ['14', 'b'], ['15', 'w']]
-
-    initGameBoard(dummy);  
+   initGameBoard(dummy);  
 }
 function initGameBoard(data){
     
@@ -85,8 +83,10 @@ function initGameBoard(data){
         .attr("rx",16)
         .attr("ry",16)
         .on("click",(d,i)=>{
-            updateData();
-
+            var p=board.findIndex(e=>e[0]==d[0])
+            pyshell.send("("+oned(p)[0]+","+oned(p)[1]+")")
+            clickedPiece=i;
+            board=[];
 
         });
 

@@ -43,7 +43,7 @@ class GameBoard:
 
         #Create 3x5 empty board
         self.board = [['e' for i in range(5)] for i in range(3)]
-
+        self.board_state_helper=[list(range(0,5)),list(range(5,10)),list(range(10,15))]
         pieces=iter(board_string.replace(" ","")) #replace blank spaces with nothing and create an iterator
 
         for i,row in enumerate(self.board):
@@ -140,6 +140,12 @@ class GameBoard:
             return  # create exception?
 
         empty_position = self.get_empty_position()
+        o=self.board_state_helper[new_position[0]][new_position[1]]
+        n=self.board_state_helper[empty_position[0]][empty_position[1]]
+
+        self.board_state_helper[empty_position[0]][empty_position[1]]= o
+        self.board_state_helper[new_position[0]][new_position[1]]=n
+
         self.board[empty_position[0]][empty_position[1]] = self.board[new_position[0]][new_position[1]]
         self.board[new_position[0]][new_position[1]] = 'e'
 
