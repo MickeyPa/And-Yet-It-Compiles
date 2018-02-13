@@ -1,8 +1,6 @@
 var d3 = require('d3');
 var $= require('jquery');
-var dummy=[{'pos':[0,0],'piece':'a'},{'pos':[0,1],'piece':'b'},{'pos':[0,2],'piece':'c'},{'pos':[0,3],'piece':'d'},{'pos':[0,4],'piece':'e'},
-                {'pos':[1,0],'piece':'f'},{'pos':[1,1],'piece':'g'},{'pos':[1,2],'piece':'h'},{'pos':[1,3],'piece':'i'},{'pos':[1,4],'piece':'j'},
-                {'pos':[2,0],'piece':'k'},{'pos':[2,1],'piece':'l'},{'pos':[2,2],'piece':'m'},{'pos':[2,3],'piece':'n'},{'pos':[2,4],'piece':'o'}]
+var dummy = [['1','r'] ,['2','e'] ,['3','b'] ,['4','w'] ,['5','r'], ['6','b'] ,['7','b'] ,['8','b'] ,['9','r'] ,['10','r'] ,['11','r'] ,['12','b'] ,['13','r'] ,['14','b'] ,['15','w']]
 
 var margin = {top: 0, right:0, bottom: 0, left: 0},
             width =600 - margin.left - margin.right,
@@ -20,9 +18,8 @@ initGameBoard(dummy);
 
 
 function updateData(){
-    var dummy=[{'pos':[0,0],'piece':'a'},{'pos':[0,1],'piece':'b'},{'pos':[0,2],'piece':'c'},{'pos':[0,3],'piece':'e'},{'pos':[0,4],'piece':'d'},
-            {'pos':[1,0],'piece':'f'},{'pos':[1,1],'piece':'g'},{'pos':[1,2],'piece':'h'},{'pos':[1,3],'piece':'i'},{'pos':[1,4],'piece':'j'},
-            {'pos':[2,0],'piece':'k'},{'pos':[2,1],'piece':'l'},{'pos':[2,2],'piece':'m'},{'pos':[2,3],'piece':'n'},{'pos':[2,4],'piece':'o'}]
+    var dummy = [['1', 'r'], ['7', 'b'], ['3', 'b'], ['4', 'w'], ['5', 'r'], ['6', 'b'], ['2', 'e'], ['8', 'b'], ['9', 'r'], ['10', 'r'], ['11', 'r'], ['12', 'b'], ['13', 'r'], ['14', 'b'], ['15', 'w']]
+
     initGameBoard(dummy);  
 }
 function initGameBoard(data){
@@ -35,48 +32,64 @@ function initGameBoard(data){
     var oned=function(i){
         return [Math.floor(i/5),i%5];
     }
-    var g=svg.selectAll("g").data(data,d=>d.piece)
- 
+    var g=svg.selectAll("g").data(data,d=>d[0])
+    svg.selectAll("rect").data(data).enter().append("rect")
+        .attr("class", "empty-field")
+        .attr("x", (d, i) => x(oned(i)[1]))
+        .attr("y", (d, i) => y(oned(i)[0]))
+        .attr("height", 100)
+        .attr("width", 100)
+        .attr("rx", 16)
+        .attr("ry", 16);
 
     var gEnter = g.enter().append("g");
    
-    g.select(".r-piece").transition()
+    g.select(".pieces").transition()
         .duration(750).attr("x",(d,i)=>x(oned(i)[1]))
         .attr("y",(d,i)=>y(oned(i)[0]))
-        .attr("display",d=>d.piece=='e'?'none':'')
+        .attr("display",d=>d[1]=='e'?'none':'')
 
-    g.select(".r-bot").transition()
+    g.select(".bots").transition()
         .duration(750).attr("x",(d,i)=>x(oned(i)[1])+4)
         .attr("y",(d,i)=>y(oned(i)[0])+88)
-        .attr("display",d=>d.piece=='e'?'none':'')
+        .attr("display",d=>d[1]=='e'?'none':'')
     g.select(".piece-text").transition()
     .duration(750)
-        .attr("x",(d,i)=>x(oned(i)[1]))
-        .attr("y",(d,i)=>y(oned(i)[0]))
- 
+        .attr("x",(d,i)=>x(oned(i)[1])+35)
+        .attr("y",(d,i)=>y(oned(i)[0])+60);
+    
     gEnter.append("rect")
-        .attr("class", "r-piece")
+        .attr("class", d=>d[1]+"-piece pieces")
         .attr("x",(d,i)=>x(oned(i)[1]))
         .attr("y",(d,i)=>y(oned(i)[0]))
-        .attr("display",d=>d.piece=='e'?'none':'')
+        .attr("display",d=>d[1]=='e'?'none':'')
         .attr("height",100)
         .attr("width",100)
         .attr("rx",16)
-        .attr("ry",16);
+        .attr("ry",16)
+        .on("click",(d,i)=>{
+            updateData();
+
+
+        });
+
+    
     gEnter.append("rect")
-        .attr("class", "r-bot")
+        .attr("class", d => d[1] +"-bot bots")
         .attr("x",(d,i)=>x(oned(i)[1])+4)
         .attr("y",(d,i)=>y(oned(i)[0])+88)
-        .attr("display",d=>d.piece=='e'?'none':'')
+        .attr("display",d=>d[1]=='e'?'none':'')
         .attr("height",12)
         .attr("width",92)
         .attr("rx",18)
         .attr("ry",30);
-    gEnter.append("text").text("R")
-        .attr("display",d=>d.piece=='e'?'none':'')
-        .attr("x",(d,i)=>x(oned(i)[1])+40)
-        .attr("y",(d,i)=>y(oned(i)[0])+50)
+    gEnter.append("text").text(d=>d[1])
+        .attr("display",d=>d[1]=='e'?'none':'')
+        .attr("x",(d,i)=>x(oned(i)[1])+35)
+        .attr("y",(d,i)=>y(oned(i)[0])+60)
         .attr("class", "piece-text")
+
+ 
 
    
          
