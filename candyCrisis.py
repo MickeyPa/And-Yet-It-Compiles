@@ -6,8 +6,8 @@ import ast  # used to convert str to tuple
 
 print()
 print("HELLO AND WELCOME TO CANDY CRISIS, THE MOST DELICIOUS GAME IN TOWN!")
-print("Please specify the path to your gameboard configuration:")
-gbFilePath = input()
+#print("Please specify the path to your gameboard configuration:")
+#gbFilePath = input()
 
 # !!!!! CALLS THE IMPORT GAMEBOARD FEATURE and creates gameboard object with it
 

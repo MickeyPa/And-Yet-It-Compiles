@@ -11,7 +11,7 @@ body{
     justify-content: center;
 }
 .pieces{
-    cursor: pointer
+    cursor: pointer;
 }
 .r-piece{
     fill: #c24b31;
