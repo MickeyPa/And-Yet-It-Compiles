@@ -17,6 +17,7 @@ g=GameBoard()
 print("Woohoo! This is your gameboard. Let's get playing!")
 turnNum = 0 # number of turns in the game
 goalState = False
+gui_board=0
 while not goalState:
     turnNum += 1
     #I did this for the gui
@@ -56,6 +57,6 @@ while not goalState:
 
 # end [while not goalState]
 
-
+print(gui_board)
 print("CONGRATULATIONS! YOU HAVE WON THE GAME! EUREKA! FELICITATIONS! HAPPY BIRTHDAY!")
 
