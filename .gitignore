@@ -15,3 +15,5 @@ __pycache__/
 /gui/.vscode
 /gui/node_modules
 /gui/npm-debug.log
+/build/candyCrisis
+/candyCrisis.spec

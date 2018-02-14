@@ -17,7 +17,7 @@ var svg = d3.select("#gameboard").append("svg")
 
 var board=[];
 var PythonShell = require('python-shell');
-var pyshell = new PythonShell('candyCrisis.py', {pythonPath:'py', scriptPath: '../' });
+var pyshell = new PythonShell('candyCrisis.exe', {pythonPath:' ', scriptPath: '../dist' });
 var emptyPiece;
 var emptyPiecePos;
 var clickedPiece;
@@ -85,8 +85,7 @@ function initGameBoard(data){
         .on("click",(d,i)=>{
             var p=board.findIndex(e=>e[0]==d[0])
             pyshell.send("("+oned(p)[0]+","+oned(p)[1]+")")
-            clickedPiece=i;
-            board=[];
+           
 
         });
 
