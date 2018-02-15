@@ -1,0 +1,10 @@
+directories:
+  output: dist
+  buildResources: build
+appId: candycrisis.id
+win:
+  target:
+    - target: dir
+      arch:
+        - x64
+electronVersion: 1.8.2

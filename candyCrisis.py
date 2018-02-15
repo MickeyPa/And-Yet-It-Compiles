@@ -4,15 +4,21 @@
 
 import ast  # used to convert str to tuple
 
+
+
 print()
 print("HELLO AND WELCOME TO CANDY CRISIS, THE MOST DELICIOUS GAME IN TOWN!")
-#print("Please specify the path to your gameboard configuration:")
-#gbFilePath = input()
+print("Specify the gameboard string")
+string=input()
+
+
+
+
 
 # !!!!! CALLS THE IMPORT GAMEBOARD FEATURE and creates gameboard object with it
 
 from application.GameBoard import GameBoard
-g=GameBoard()
+g=GameBoard(string)
 
 print("Woohoo! This is your gameboard. Let's get playing!")
 turnNum = 0 # number of turns in the game
@@ -57,6 +63,7 @@ while not goalState:
 
 # end [while not goalState]
 
+gui_board=list(map(list,list(zip([p for row in g.board_state_helper for p in row],[p for row in g.board for p in row]))))
 print(gui_board)
 print("CONGRATULATIONS! YOU HAVE WON THE GAME! EUREKA! FELICITATIONS! HAPPY BIRTHDAY!")
 
