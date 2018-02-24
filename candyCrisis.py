@@ -3,13 +3,14 @@
 ###########################################################################
 
 import ast  # used to convert str to tuple
-
-
+file = open("Sample_Data.txt", 'r',encoding="utf8")
+string = file.read().split("\n")[0]
+file.detach()
 
 print()
 print("HELLO AND WELCOME TO CANDY CRISIS, THE MOST DELICIOUS GAME IN TOWN!")
-print("Specify the gameboard string")
-string=input()
+#print("Specify the path to your gameboard configuration:")
+#gbFilePath = input()
 
 
 
@@ -27,12 +28,12 @@ gui_board=0
 while not goalState:
     turnNum += 1
     #I did this for the gui
-    gui_board=list(map(list,list(zip([p for row in g.board_state_helper for p in row],[p for row in g.board for p in row]))))
-    print(gui_board)
-    #print(g.board[0])
-    #print(g.board[1])
-    #print(g.board[2])
-    #print()
+    #gui_board=list(map(list,list(zip([p for row in g.board_state_helper for p in row],[p for row in g.board for p in row]))))
+    #print(gui_board)
+    print(g.board[0])
+    print(g.board[1])
+    print(g.board[2])
+    print()
 
     valid = False
     # loop until they enter a valid input

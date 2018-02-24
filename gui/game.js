@@ -1,13 +1,19 @@
+
+setInterval(function(){
+document.getElementById("debug").innerText = "loaded"
 var d3 = require('d3');
 var $ = require('jquery');
-require('electron-debug')({ enabled: true });
+//require('electron-debug')({ enabled: true });
 
 var uint8arrayToString = function (data) {
     return String.fromCharCode.apply(null, data);
 };
+var path = require('path');
+
+//document.getElementById("debug").innerText = path.resolve(__dirname, "Sample_Data.txt")
+
 var enc = new TextEncoder("utf-8");
 const spawn = require('child_process').execFile;
-var path = require('path');
 const scriptExecution = spawn(path.resolve(__dirname, "CandyCrisis_console.exe"));
 
 var margin = { top: 0, right: 0, bottom: 0, left: 0 },
@@ -25,7 +31,7 @@ var svg = d3.select("#gameboard").append("svg")
 
 
 var board = [];
-var string=""
+var string="";
 var fs = require('fs');
 fs.readFile(path.resolve(__dirname, "Sample_Data.txt"), 'utf8', function (err, data) {
     string=data.split("\n")[0];
@@ -148,3 +154,4 @@ function showFinished(){
         
 
 }
+},1000);

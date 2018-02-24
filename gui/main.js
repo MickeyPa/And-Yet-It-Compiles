@@ -18,7 +18,7 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  win.setMenuBarVisibility=false;
+  //win.setMenuBarVisibility(true);
 
   // Emitted when the window is closed.
   win.on('closed', () => {
