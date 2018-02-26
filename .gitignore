@@ -1,0 +1,17 @@
+﻿# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+/.idea
+/gui/.vscode
+/gui/node_modules
+/gui/npm-debug.log

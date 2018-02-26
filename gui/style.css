@@ -1,0 +1,53 @@
+html{
+    height: 100%;
+}
+body{
+    background: radial-gradient(circle, #8323f7, #33006b);
+    margin: 0px;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+.pieces{
+    cursor: pointer;
+}
+.r-piece{
+    fill: #c24b31;
+}
+.r-bot{
+    fill: #aa422b;
+}
+
+.b-piece{
+    fill: #30a7c2;
+}
+.b-bot{
+    fill: #2a93aa;;
+}
+.w-piece{
+    fill: #a7c231;
+}
+.w-bot{
+    fill: #7eaa2b;
+}
+#gameboard{
+    display: flex;
+    justify-content: center;
+}
+#gameboard svg{
+
+
+}
+#back{
+    display: flex;
+    justify-content: center;
+}
+.piece-text{
+    font-size: 48px;
+    fill: rgba(255, 255, 255, 0.43);
+}
+.empty-field{
+   fill: rgba(0, 0, 0, 0.13);
+}
