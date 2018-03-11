@@ -18,3 +18,5 @@ __pycache__/
 /build/candyCrisis
 /candyCrisis.spec
 /npm-debug.log
+
+/.vs

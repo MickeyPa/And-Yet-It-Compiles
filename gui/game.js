@@ -1,20 +1,12 @@
-
-setInterval(function(){
-document.getElementById("debug").innerText = "loaded"
 var d3 = require('d3');
 var $ = require('jquery');
-//require('electron-debug')({ enabled: true });
 
 var uint8arrayToString = function (data) {
     return String.fromCharCode.apply(null, data);
 };
-var path = require('path');
-
-//document.getElementById("debug").innerText = path.resolve(__dirname, "Sample_Data.txt")
-
 var enc = new TextEncoder("utf-8");
-const spawn = require('child_process').execFile;
-const scriptExecution = spawn(path.resolve(__dirname, "CandyCrisis_console.exe"));
+const spawn = require('child_process').spawn;
+const scriptExecution = spawn("../dist/candyCrisis.exe", ['-i']);
 
 var margin = { top: 0, right: 0, bottom: 0, left: 0 },
     width = 600 - margin.left - margin.right,
@@ -31,26 +23,18 @@ var svg = d3.select("#gameboard").append("svg")
 
 
 var board = [];
-var string="";
-var fs = require('fs');
-fs.readFile(path.resolve(__dirname, "Sample_Data.txt"), 'utf8', function (err, data) {
-    string=data.split("\n")[0];
-    // data is the contents of the text file we just read
-});
+
+
 
 var emptyPiece;
 var emptyPiecePos;
 var clickedPiece;
 scriptExecution.stdout.on('data', function (data) {
-    message = data.split("\n");
-    
-    for(var i=0;i<message.length;i++){
-     
-        if (message[i].substr(0, 7) == "Specify") {
-            scriptExecution.stdin.write(string+"\n");
-        }
-        if (message[i].substr(0,3)== "CON"){
-            showFinished()
+    message = uint8arrayToString(data).split("\n");
+
+    for (var i = 0; i < message.length; i++) {
+        if (message[i].substr(0, 3) == "CON") {
+            console.log("done");
         }
         if (message[i].substr(0, 2) == "[[") {
             message[i] = message[i].replace(/'/g, '"');
@@ -58,7 +42,7 @@ scriptExecution.stdout.on('data', function (data) {
             initGameBoard(board);
         }
     }
-    
+
 
 });
 scriptExecution.on('error', function (err) {
@@ -149,9 +133,3 @@ function initGameBoard(data) {
 
 
 }
-function showFinished(){
-    var won = document.getElementById("won").hidden=false;
-        
-
-}
-},1000);
