@@ -69,7 +69,7 @@ for string in gameStrings:
 
     # Check if game is NOT playable
     if string[:1] == ':':
-        print("Game #" + (gameNum+1) + "is not playable" + string)
+        print("Game #" + (gameNum+1) + " is not playable " + string)
         continue
 
     g = GameBoard(string)
