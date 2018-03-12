@@ -1,12 +1,14 @@
 var d3 = require('d3');
 var $ = require('jquery');
+const path = require('path')
 
 var uint8arrayToString = function (data) {
     return String.fromCharCode.apply(null, data);
 };
 var enc = new TextEncoder("utf-8");
-const spawn = require('child_process').spawn;
-const scriptExecution = spawn("../dist/candyCrisis.exe", ['-i']);
+const spawn = require('child_process');
+
+const scriptExecution = spawn.spawn('../dist/candyCrisis.exe');
 
 var margin = { top: 0, right: 0, bottom: 0, left: 0 },
     width = 600 - margin.left - margin.right,
@@ -48,7 +50,6 @@ scriptExecution.stdout.on('data', function (data) {
 scriptExecution.on('error', function (err) {
     console.log(err);
 });
-
 
 
 

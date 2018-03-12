@@ -1,9 +1,11 @@
 ###########################################################################
 # MAIN DRIVER
 ###########################################################################
-
+import os
+file_dir = os.path.join(os.getcwd(), "Sample_Data.txt")
 import ast  # used to convert str to tuple
-file = open("Sample_Data.txt", 'r',encoding="utf8")
+file = open(file_dir, 'r',encoding="utf8")
+
 string = file.read().split("\n")[0]
 file.detach()
 
