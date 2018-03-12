@@ -13,47 +13,46 @@ print("HELLO AND WELCOME TO CANDY CRISIS, THE MOST DELICIOUS GAME IN TOWN!")
 # Ask if import or level choice is desired?
 
 # Import file
-importFile = open("Sample_Data.txt", 'r', encoding="utf8")
+file = open("Sample_Data.txt", 'r', encoding="utf8")
 gameStrings = []
 
 # Check if game is solvable. If it is, add it to gameStrings
-for string in importFile.read().split("\n"):
+for string in file.read().split("\n"):
     game = string.split(" ")
 
     # check if game has exactly fifteen pieces
     exactNumPieces = True
-    if game.len() != 15:
+    if len(game) != 15:
         exactNumPieces = False
 
     # check if all pieces are single characters
     allChars = True
     for piece in game:
-        if piece.len() > 1:
+        if len(piece) > 1:
             allChars = False
             break
 
     # check if game has ONLY 1 empty position e
-    numE = 0
-    for piece in game:
-        if piece == 'e':
-            numE += 1
+    onlyOneE = True
+    if game.count('e') != 1:
+        onlyOneE = False
 
     # check if game contains AT LEAST 5 pairs of letters
     pairs = []
     numPairs = 0
     for piece in game:
-        if pairs.__contains__(piece):
+        if pairs.count(piece) == 1:
             numPairs += 1
             pairs.remove(piece)
         else:
             pairs.append(piece)
 
     # if both are true, append string to gameStrings, else append a string describing the FIRST error found.
-    if (numE == 1) and (numPairs >= 5) and exactNumPieces and allChars:
+    if (numPairs >= 5) and onlyOneE and exactNumPieces and allChars:
         gameStrings.append(string)
     elif not exactNumPieces:
         gameStrings.append(': Does not contain exactly fifteen pieces.')
-    elif numE != 1:
+    elif not onlyOneE:
         gameStrings.append(': Does not contain exactly one empty position.')
     elif not allChars:
         gameStrings.append(': Not all game pieces are single characters.')
@@ -61,7 +60,7 @@ for string in importFile.read().split("\n"):
         gameStrings.append(': Game is not solvable.')
 
 # Close input file
-importFile.detach()
+file.detach()
 
 # Start running games
 gameNum = 0
