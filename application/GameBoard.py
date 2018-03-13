@@ -151,7 +151,7 @@ class GameBoard:
 
     # check goal state
     def check_goal_state(self):
-        for x in range(0, 4):
+        for x in range(0, 5):
             if self.board[0][x] != self.board[2][x]:
                 return False
 
