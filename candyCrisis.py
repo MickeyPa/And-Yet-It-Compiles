@@ -76,7 +76,7 @@ for string in gameStrings:
 
     # ASK HERE if want to run automatic mode or not.
 
-    print("Here's game #" + gameNum + "!")
+    print("Here's game #" + str(gameNum) + "!")
     print("Woohoo! This is your gameboard. Let's get playing!")
     turnNum = 0  # number of turns in the game
     goalState = False
