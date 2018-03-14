@@ -22,7 +22,7 @@ class StateSpaceTree():
                     next_gameboard.move(move)
                     #Ignore states that have already been traversed
                     if not str(next_gameboard.board) in explored_gameboards:
-                         current_node.add_child(Node(next_gameboard,move=current_node.past_moves+[move]))
+                         current_node.add_child(Node(next_gameboard,move=current_node.past_moves+[move],h=self.evaluate_node_heuristic()))
 
 
             '''Step 2: Evaluate Heurstic and choose the next node'''
@@ -33,16 +33,18 @@ class StateSpaceTree():
                 current_node=open_list[0]
                 open_list.pop(0)
             else:
-                rand=random.randint(0, len(current_node.children) - 1)
-                open_list = open_list + [n for i,n in enumerate(current_node.children) if i != rand]
-                current_node=current_node.children[rand]
+                hs_of_x=[node.h for node in current_node.children]
+                hs_i=hs_of_x.index(min(hs_of_x))
+                open_list = open_list + [n for i,n in enumerate(current_node.children) if i != hs_i]
+                current_node=current_node.children[hs_i]
                 explored_gameboards[str(current_node.gameboard.board)]=1
         return current_node.past_moves
 
-
+    def evaluate_node_heuristic(self):
+        return random.random()
 
 class Node():
-    def __init__(self,gameboard,children=None,move=None):
+    def __init__(self,gameboard,children=None,move=None,h=float('inf')):
         # had to do it this way because python==wierd
         if children is None:
             self.children=[]
@@ -50,7 +52,7 @@ class Node():
             self.children=children
 
         self.gameboard=gameboard
-        self.h=0
+        self.h=h
         if move is None:
             self.past_moves=[]
         else:
@@ -59,9 +61,8 @@ class Node():
     def add_child(self,child):
         self.children.append(child)
 
-    # def build_tree(self):
-    #
-    #     children=self.gameboard.successors()
+
+
 
 from application.GameBoard import GameBoard
 
