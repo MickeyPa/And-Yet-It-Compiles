@@ -12,3 +12,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 /.idea
+/gui/.vscode
+/gui/node_modules
+/gui/npm-debug.log
