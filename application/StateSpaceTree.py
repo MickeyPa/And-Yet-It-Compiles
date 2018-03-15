@@ -14,7 +14,7 @@ class StateSpaceTree():
         current_node=self.start_node
         while(not current_node.gameboard.check_goal_state()):
 
-            '''Step 1: Expand current node to calcualte all the next states'''
+            '''Step 1: Expand current node to calculate all the next states'''
             if current_node.children==[]:
                 moves=current_node.gameboard.successors()
                 for move in moves:
@@ -25,7 +25,7 @@ class StateSpaceTree():
                          n=Node(next_gameboard,move=current_node.past_moves+[move],h=self.evaluate_node_heuristic(next_gameboard))
                          current_node.add_child(n)
 
-            '''Step 2: Evaluate Heurstic and choose the next node'''
+            '''Step 2: Evaluate Heuristic and choose the next node'''
 
             #if the tree reaches the end, take the next node from the open list
             # If no goal state is reached by 20 moves, take the next node from the open list
@@ -81,4 +81,11 @@ string = "b r b w w r r b b b b r e r r"
 game_board = GameBoard(string)
 s=StateSpaceTree(game_board)
 
-print(str(s.find_goal_state()))
+solution = str(s.find_goal_state())
+
+# write solution to output file
+with open("output.txt", "a") as f:
+    f.write(solution)
+
+#print solution to console
+print(solution)
