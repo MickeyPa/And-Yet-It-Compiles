@@ -32,7 +32,7 @@ class StateSpaceTree():
             if current_node.children==[] or len(current_node.past_moves)>=20:
                 current_node=open_list[0]
                 open_list.pop(0)
-                
+
             else:
                 hs_of_x=[node.h for node in current_node.children]
                 hs_i=hs_of_x.index(min(hs_of_x))
