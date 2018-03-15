@@ -122,6 +122,7 @@ for string in gameStrings:
             print("[Turn #", turnNum, "] What is your move? Type auto to solve the puzzle")
             if automatic_mode:
                 nextMove=automatic_moves.pop(0)
+                print("automatic move chose: ",position_map_reverse[nextMove])
             else:
                 nextMove=input()
                 if nextMove=='auto':
@@ -129,7 +130,7 @@ for string in gameStrings:
                     state_space_tree = StateSpaceTree(g)
                     automatic_moves=state_space_tree.find_goal_state()
                     nextMove = automatic_moves.pop(0)
-
+                    print("automatic move chose: ",position_map_reverse[nextMove])
                 else:
                     playerInput = input()
                     nextMove = position_map[playerInput]
@@ -147,6 +148,7 @@ for string in gameStrings:
 
         g.move(nextMove)
         print("Nice move!")
+        print("==================================================================================================================================")
         if g.check_goal_state():
             goalState = True
         else:
