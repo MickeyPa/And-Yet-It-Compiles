@@ -1,6 +1,6 @@
 import copy
 import random
-
+import string
 
 class StateSpaceTree():
     def __init__(self, gameboard):
@@ -72,7 +72,16 @@ class Node():
     def add_child(self,child):
         self.children.append(child)
 
+position_map_reverse = {a: b for a, b in
+                zip([(i, j) for i in range(0, 3) for j in range(0, 5)], [s for s in string.ascii_uppercase[0:24]])}
+# Example: position_map[(0,0)]=A
 
+#creat list of valid inputs for player
+def presentPlayerMoves(self):
+    playerMoves = []
+    for E in self:
+        playerMoves.append(position_map_reverse[E])
+    return playerMoves
 
 
 from application.GameBoard import GameBoard
@@ -81,7 +90,7 @@ string = "b r b w w r r b b b b r e r r"
 game_board = GameBoard(string)
 s=StateSpaceTree(game_board)
 
-solution = str(s.find_goal_state())
+solution = str(presentPlayerMoves(s.find_goal_state()))
 
 # write solution to output file
 with open("output.txt", "a") as f:
