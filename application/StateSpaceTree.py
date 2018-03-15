@@ -42,12 +42,16 @@ class StateSpaceTree():
         return current_node.past_moves
 
     def evaluate_node_heuristic(self,game_board):
-        h=0
-        row_1=game_board.board[0]
-        row_2=game_board.board[2]
-        for i,piece in enumerate(row_1):
-            if piece!=row_2[i]:
-                h+=1
+        h = 0
+        row_1 = game_board.board[0]
+        row_2 = game_board.board[2]
+        for i, piece1 in enumerate(row_1):
+            distance = 4
+            for j, piece2 in enumerate(row_2):
+                if piece1 == piece2:
+                    if (abs(i-j)) < distance:
+                        distance = abs(i-j)
+            h += distance
         return h
 
 class Node():
