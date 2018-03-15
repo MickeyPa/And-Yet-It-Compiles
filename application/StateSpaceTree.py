@@ -22,8 +22,8 @@ class StateSpaceTree():
                     next_gameboard.move(move)
                     #Ignore states that have already been traversed
                     if not str(next_gameboard.board) in explored_gameboards:
-                         current_node.add_child(Node(next_gameboard,move=current_node.past_moves+[move],h=self.evaluate_node_heuristic()))
-
+                         n=Node(next_gameboard,move=current_node.past_moves+[move],h=self.evaluate_node_heuristic(next_gameboard))
+                         current_node.add_child(n)
 
             '''Step 2: Evaluate Heurstic and choose the next node'''
 
@@ -32,6 +32,7 @@ class StateSpaceTree():
             if current_node.children==[] or len(current_node.past_moves)>=20:
                 current_node=open_list[0]
                 open_list.pop(0)
+                
             else:
                 hs_of_x=[node.h for node in current_node.children]
                 hs_i=hs_of_x.index(min(hs_of_x))
@@ -40,8 +41,14 @@ class StateSpaceTree():
                 explored_gameboards[str(current_node.gameboard.board)]=1
         return current_node.past_moves
 
-    def evaluate_node_heuristic(self):
-        return random.random()
+    def evaluate_node_heuristic(self,game_board):
+        h=0
+        row_1=game_board.board[0]
+        row_2=game_board.board[2]
+        for i,piece in enumerate(row_1):
+            if piece!=row_2[i]:
+                h+=1
+        return h
 
 class Node():
     def __init__(self,gameboard,children=None,move=None,h=float('inf')):
@@ -66,8 +73,8 @@ class Node():
 
 from application.GameBoard import GameBoard
 
-#string = "b r b w w r r b b b b r e r r"
-game_board = GameBoard()
+string = "b r b w w r r b b b b r e r r"
+game_board = GameBoard(string)
 s=StateSpaceTree(game_board)
 
 print(str(s.find_goal_state()))

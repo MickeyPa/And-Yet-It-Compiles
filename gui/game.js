@@ -80,16 +80,16 @@ function initGameBoard(data) {
     var gEnter = g.enter().append("g");
 
     g.select(".pieces").transition()
-        .duration(750).attr("x", (d, i) => x(oned(i)[1]))
+        .duration(250).attr("x", (d, i) => x(oned(i)[1]))
         .attr("y", (d, i) => y(oned(i)[0]))
         .attr("display", d => d[1] == 'e' ? 'none' : '')
 
     g.select(".bots").transition()
-        .duration(750).attr("x", (d, i) => x(oned(i)[1]) + 4)
+        .duration(250).attr("x", (d, i) => x(oned(i)[1]) + 4)
         .attr("y", (d, i) => y(oned(i)[0]) + 88)
         .attr("display", d => d[1] == 'e' ? 'none' : '')
     g.select(".piece-text").transition()
-        .duration(750)
+        .duration(250)
         .attr("x", (d, i) => x(oned(i)[1]) + 35)
         .attr("y", (d, i) => y(oned(i)[0]) + 60);
 

@@ -4,7 +4,7 @@
 
 import ast  # used to convert str to tuple
 from application.GameBoard import GameBoard
-
+from application.StateSpaceTree import StateSpaceTree
 print()
 print("HELLO AND WELCOME TO CANDY CRISIS, THE MOST DELICIOUS GAME IN TOWN!")
 # print("Please specify the path to your gameboard configuration:")
@@ -80,6 +80,8 @@ for string in gameStrings:
     print("Woohoo! This is your gameboard. Let's get playing!")
     turnNum = 0  # number of turns in the game
     goalState = False
+    automatic_mode=False
+    automatic_moves=[]
     while not goalState:
         turnNum += 1
         # I did this for the gui
@@ -98,9 +100,22 @@ for string in gameStrings:
             print("Your possible moves are:")
             print(s)
             print()
-            print("[Turn #", turnNum, "] What is your move?")
-            nextMove=ast.literal_eval(input())
-            print()
+            print("[Turn #", turnNum, "] What is your move? Type auto to solve the puzzle")
+            if automatic_mode:
+                nextMove=automatic_moves.pop(0)
+            else:
+                nextMove=input()
+                if nextMove=='auto':
+                    automatic_mode=True
+                    state_space_tree = StateSpaceTree(g)
+                    automatic_moves=state_space_tree.find_goal_state()
+                    nextMove = automatic_moves.pop(0)
+
+                else:
+                    nextMove = ast.literal_eval(input())
+                    print()
+
+
 
             # search set of successors to see if input is valid
             if nextMove in s:
