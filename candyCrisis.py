@@ -3,6 +3,7 @@
 ###########################################################################
 
 import ast  # used to convert str to tuple
+import string
 from application.GameBoard import GameBoard
 from application.StateSpaceTree import StateSpaceTree
 print()
@@ -15,6 +16,23 @@ print("HELLO AND WELCOME TO CANDY CRISIS, THE MOST DELICIOUS GAME IN TOWN!")
 # Import file
 file = open("Sample_Data.txt", 'r', encoding="utf8")
 gameStrings = []
+
+# convert character into tuple, ex: A into (0,0)
+position_map = {a: b for a, b in
+                zip([s for s in string.ascii_uppercase[0:24]], [(i, j) for i in range(0, 3) for j in range(0, 5)])}
+# Example: position_map['A']=(0,0)
+
+# convert character into tuple, ex: (0,0) into A
+position_map_reverse = {a: b for a, b in
+                zip([(i, j) for i in range(0, 3) for j in range(0, 5)], [s for s in string.ascii_uppercase[0:24]])}
+# Example: position_map[(0,0)]=A
+
+#creat list of valid inputs for player
+def presentPlayerMoves(self):
+    playerMoves = []
+    for E in self:
+        playerMoves.append(position_map_reverse[E])
+    return playerMoves
 
 # Check if game is solvable. If it is, add it to gameStrings
 for string in file.read().split("\n"):
@@ -98,11 +116,13 @@ for string in gameStrings:
             e=g.get_empty_position()
             s=g.successors()
             print("Your possible moves are:")
-            print(s)
+            nextPossibleMoves = presentPlayerMoves(s)
+            print(nextPossibleMoves)
             print()
             print("[Turn #", turnNum, "] What is your move? Type auto to solve the puzzle")
             if automatic_mode:
                 nextMove=automatic_moves.pop(0)
+                print("automatic move chose: ",position_map_reverse[nextMove])
             else:
                 nextMove=input()
                 if nextMove=='auto':
@@ -110,9 +130,10 @@ for string in gameStrings:
                     state_space_tree = StateSpaceTree(g)
                     automatic_moves=state_space_tree.find_goal_state()
                     nextMove = automatic_moves.pop(0)
-
+                    print("automatic move chose: ",position_map_reverse[nextMove])
                 else:
-                    nextMove = ast.literal_eval(input())
+                    playerInput = input()
+                    nextMove = position_map[playerInput]
                     print()
 
 
@@ -127,6 +148,7 @@ for string in gameStrings:
 
         g.move(nextMove)
         print("Nice move!")
+        print("==================================================================================================================================")
         if g.check_goal_state():
             goalState = True
         else:
@@ -137,4 +159,3 @@ for string in gameStrings:
     print("CONGRATULATIONS! YOU HAVE WON THE GAME! EUREKA! FELICITATIONS! HAPPY BIRTHDAY!")
 
 # end [for string in gameStrings]
-
