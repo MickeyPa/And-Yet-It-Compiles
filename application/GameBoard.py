@@ -1,6 +1,8 @@
 import string
 import config
 import random
+
+
 class GameBoard:
     # empty_position is a tuple containing the index values of the empty slot's position on the gameboard.
 

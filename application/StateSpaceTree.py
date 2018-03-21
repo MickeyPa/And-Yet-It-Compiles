@@ -29,29 +29,21 @@ class StateSpaceTree():
 
             #if the tree reaches the end, take the next node from the open list
             # If no goal state is reached by 20 moves, take the next node from the open list
-            if current_node.children==[] or len(current_node.past_moves)>=20:
-                current_node=open_list[0]
-                open_list.pop(0)
 
-            else:
-                hs_of_x=[node.h for node in current_node.children]
-                hs_i=hs_of_x.index(min(hs_of_x))
-                open_list = open_list + [n for i,n in enumerate(current_node.children) if i != hs_i]
-                current_node=current_node.children[hs_i]
-                explored_gameboards[str(current_node.gameboard.board)]=1
+            open_list = open_list + [n for i,n in enumerate(current_node.children)]
+            open_list.sort(key=lambda n: n.h, reverse=False)
+            current_node = open_list[0]
+            open_list.pop(0)
+            explored_gameboards[str(current_node.gameboard.board)]=1
         return current_node.past_moves
 
-    def evaluate_node_heuristic(self,game_board):
+    def evaluate_node_heuristic(self, game_board):
         h = 0
         row_1 = game_board.board[0]
         row_2 = game_board.board[2]
-        for i, piece1 in enumerate(row_1):
-            distance = 4
-            for j, piece2 in enumerate(row_2):
-                if piece1 == piece2:
-                    if (abs(i-j)) < distance:
-                        distance = abs(i-j)
-            h += distance
+        for i, piece in enumerate(row_1):
+            if piece != row_2[i]:
+                h += 1
         return h
 
 class Node():
@@ -84,17 +76,3 @@ def presentPlayerMoves(self):
     return playerMoves
 
 
-from application.GameBoard import GameBoard
-
-string = "b r b w w r r b b b b r e r r"
-game_board = GameBoard(string)
-s=StateSpaceTree(game_board)
-
-solution = str(presentPlayerMoves(s.find_goal_state()))
-
-# write solution to output file
-with open("output.txt", "a") as f:
-    f.write(solution)
-
-#print solution to console
-print(solution)

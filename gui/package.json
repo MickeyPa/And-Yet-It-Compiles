@@ -27,5 +27,8 @@
         }
       ]
     }
+  },
+  "dependencies": {
+    "buffered-reader": "^1.0.1"
   }
 }

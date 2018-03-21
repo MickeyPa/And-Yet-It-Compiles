@@ -1,7 +1,8 @@
 ###########################################################################
 # MAIN DRIVER
 ###########################################################################
-
+from datetime import datetime
+from application.graph_render import render
 import ast  # used to convert str to tuple
 import string
 from application.GameBoard import GameBoard
@@ -14,7 +15,9 @@ print("HELLO AND WELCOME TO CANDY CRISIS, THE MOST DELICIOUS GAME IN TOWN!")
 # Ask if import or level choice is desired?
 
 # Import file
-file = open("Sample_Data.txt", 'r', encoding="utf8")
+import os
+file_path=os.path.join(os.path.dirname(os.path.realpath(__file__)),"Sample_Data.txt")
+file = open(file_path, 'r', encoding="utf8")
 gameStrings = []
 
 # convert character into tuple, ex: A into (0,0)
@@ -105,10 +108,10 @@ for string in gameStrings:
         # I did this for the gui
         gui_board=list(map(list,list(zip([p for row in g.board_state_helper for p in row],[p for row in g.board for p in row]))))
         print(gui_board)
-        # print(g.board[0])
-        # print(g.board[1])
-        # print(g.board[2])
-        # print()
+        #print(g.board[0])
+        #print(g.board[1])
+        #print(g.board[2])
+        print()
 
         valid = False
         # loop until they enter a valid input
@@ -128,12 +131,27 @@ for string in gameStrings:
                 if nextMove=='auto':
                     automatic_mode=True
                     state_space_tree = StateSpaceTree(g)
+                    start =datetime.now()
+
                     automatic_moves=state_space_tree.find_goal_state()
+                    render(state_space_tree)
+                    stop = datetime .now()
+                    with open("output.txt", "a") as f:
+                        print("Solution ",end="[")
+                        for m in automatic_moves:
+                            f.write("%s " % position_map_reverse[m])
+                            print(position_map_reverse[m],end=" ")
+                        f.write("\n")
+                        print("] took "+str(round((stop-start).total_seconds()*1000))+" ms",end="\n")
+                        f.write(str(round((stop-start).total_seconds()*1000)))
+                        f.write("ms \n")
+
+
                     nextMove = automatic_moves.pop(0)
                     print("automatic move chose: ",position_map_reverse[nextMove])
                 else:
-                    playerInput = input()
-                    nextMove = position_map[playerInput]
+
+                    nextMove = position_map[nextMove]
                     print()
 
 
@@ -151,11 +169,16 @@ for string in gameStrings:
         print("==================================================================================================================================")
         if g.check_goal_state():
             goalState = True
+            gui_board = list(map(list, list(
+                zip([p for row in g.board_state_helper for p in row], [p for row in g.board for p in row]))))
+            print(gui_board)
         else:
             print("Here is your new-and-improved gameboard.")
 
     # end [while not goalState]
 
     print("CONGRATULATIONS! YOU HAVE WON THE GAME! EUREKA! FELICITATIONS! HAPPY BIRTHDAY!")
+    print("Press any key to continue")
+    input()
 
 # end [for string in gameStrings]

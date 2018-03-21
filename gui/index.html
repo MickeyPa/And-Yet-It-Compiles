@@ -4,14 +4,24 @@
     <meta charset="UTF-8">
     
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Molle:400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Monoton|Ewert" rel="stylesheet">
+
     <title>Candy Crisis</title>
 
   </head>
   <body>
-      <div id="back"><div id="gameboard"></div> </div>
-      <div id="won" hidden><h1 style="color:white">You won</h1></div>
-      <div id="debug"></div>
-  </body>
+      <div id="back">
+        
+        <div id="gameboard"><h2>Candy Crisis</h2></div>
+        <div id="console">
+          <div id="output"></div>
+          <div class="btn" onclick="auto()">Solve</div>
+        </div>
+      
+      </div>
+     
+      </body>
         <script type="text/javascript" src="game.js"></script>
 
 </html>

@@ -32,17 +32,49 @@ body{
 .w-bot{
     fill: #7eaa2b;
 }
+.y-piece{
+    fill: #a7c231;
+}
+.y-bot{
+    fill: #7eaa2b;
+}
+.g-piece{
+    fill: #a7c231;
+}
+.g-bot{
+    fill: #7eaa2b;
+}
+.p-piece{
+    fill: #a7c231;
+}
+.p-bot{
+    fill: #7eaa2b;
+}
 #gameboard{
     display: flex;
     justify-content: center;
+    flex-flow: column;
 }
 #gameboard svg{
+
+
+}
+#gameboard h2{
+    text-align: center;
+    font-size: 88px;
+    color: #dbdbdb;
+    font-family: molle;
+    text-shadow: 1px 6px 0px #9163c9, 2px 11px 7px #461482;
+    letter-spacing: 1px;
+    margin: 0px;
 
 
 }
 #back{
     display: flex;
     justify-content: center;
+    flex-flow: column;
+    height: 100%;
 }
 .piece-text{
     font-size: 48px;
@@ -50,4 +82,33 @@ body{
 }
 .empty-field{
    fill: rgba(0, 0, 0, 0.13);
+}
+#console{
+        background: rgba(0, 0, 0, 0.19);
+    height: 184px;
+    border-radius: 11px;
+    display: flex;
+    flex-flow: column;
+    margin: 41px 16px 1px 30px;
+}
+.btn{
+        margin-top: auto;
+    color: white;
+    display: flex;
+    justify-content: center;
+    height: 56px;
+    font-size: 29px;
+    align-items: center;
+    cursor: pointer;
+    background: rgb(117, 37, 210);
+    border-radius: 0px 0px 10px 10px;
+}
+.console_output {
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.37);
+}
+#output{
+    height: 185px;
+    overflow: auto;
 }
