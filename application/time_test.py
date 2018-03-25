@@ -1,17 +1,18 @@
 import timeit
+from application.StateSpaceTree import StateSpaceTree
+from application.GameBoard import GameBoard
+from _datetime import datetime
 
-# create new file
-f = open("output.txt", "a")
+s=0
+for i in range(0,10):
+    st = StateSpaceTree(GameBoard(level=3))
+    start = datetime.now()
+    st.find_goal_state()
+    stop = datetime.now()
+    s+=((stop - start).total_seconds() )
 
-f.write("\n\nGameboard #1:\n")
+print(s)
 
-# run the operation
-s = timeit.timeit('import application.StateSpaceTree', number=1)
-print(s*1000)
 
-# print time information to the file
-f.write("\nTime: " + str(s*1000) + " ms.\n")
 
-# TODO print total number of moves it took to solve ALL the puzzles
 
-f.close()

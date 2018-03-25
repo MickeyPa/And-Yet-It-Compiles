@@ -22,9 +22,16 @@ class StateSpaceTree():
                     next_gameboard.move(move)
                     #Ignore states that have already been traversed
                     if not str(next_gameboard.board) in explored_gameboards:
-                         n=Node(next_gameboard,move=current_node.past_moves+[move],h=self.evaluate_node_heuristic(next_gameboard))
-                         current_node.add_child(n)
-
+                        n = Node(next_gameboard, move=current_node.past_moves + [move],
+                                 h=self.evaluate_node_heuristic(next_gameboard)+(len(current_node.past_moves + [move])*0.4))
+                        current_node.add_child(n)
+                    elif len(current_node.past_moves+[move])<explored_gameboards[str(next_gameboard.board)]:
+                        n=Node(next_gameboard,move=current_node.past_moves+[move],h=self.evaluate_node_heuristic(next_gameboard))
+                        current_node.add_child(n)
+                        del explored_gameboards[str(next_gameboard.board)]
+                        pop=[i for i,n1 in enumerate(open_list) if n1.gameboard.board==n.gameboard.board]
+                        if len(pop)!=0:
+                            open_list.pop(pop[0])
             '''Step 2: Evaluate Heuristic and choose the next node'''
 
             #if the tree reaches the end, take the next node from the open list
@@ -34,16 +41,21 @@ class StateSpaceTree():
             open_list.sort(key=lambda n: n.h, reverse=False)
             current_node = open_list[0]
             open_list.pop(0)
-            explored_gameboards[str(current_node.gameboard.board)]=1
+            explored_gameboards[str(current_node.gameboard.board)]=len(current_node.past_moves)
         return current_node.past_moves
 
     def evaluate_node_heuristic(self, game_board):
         h = 0
         row_1 = game_board.board[0]
+        row_2 = game_board.board[1]
         row_2 = game_board.board[2]
-        for i, piece in enumerate(row_1):
-            if piece != row_2[i]:
-                h += 1
+        for i, piece1 in enumerate(row_1):
+            distance = 4
+            for j, piece2 in enumerate(row_2):
+                if piece1 == piece2:
+                    if (abs(i - j)) < distance:
+                        distance = abs(i - j)
+            h += distance
         return h
 
 class Node():

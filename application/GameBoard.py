@@ -67,65 +67,70 @@ class GameBoard:
 
         empty_position = self.get_empty_position()
         successors = []
-        if empty_position == (0, 0):  # A
-            successors = [(1, 0), (0, 1)]
-            # F,B
-
-        elif empty_position == (0, 1):  # B
-            successors = [(0, 0), (1, 1), (0, 2)]
-            # A,G,C
-
-        elif empty_position == (0, 2):  # C
-            successors = [(0, 1), (1, 2), (0, 3)]
-            # B,H,D
-
-        elif empty_position == (0, 3):  # D
-            successors = [(0, 2), (1, 3), (0, 4)]
-            # C,I,E
-
-        elif empty_position == (0, 4):  # E
-            successors = [(0, 3), (1, 4)]
-            # D,J
-
-        elif empty_position == (1, 0):  # F
-            successors = [(0, 0), (2, 0), (1, 1)]
-            # A,K,G
-
-        elif empty_position == (1, 1):  # G
-            successors = [(0, 1), (1, 0), (1, 2), (2, 1)]
-            # F,B,L,H
-
-        elif empty_position == (1, 2):  # H
-            successors = [(1, 1), (0, 2), (2, 2), (1, 3)]
-            # G,C,M,I
-
-        elif empty_position == (1, 3):  # I
-            successors = [(1, 2), (0, 3), (2, 3), (1, 4)]
-            # H,D,N,J
-
-        elif empty_position == (1, 4):  # J
-            successors = [(1, 3), (0, 4), (2, 4)]
-            # I,E,O
-
-        elif empty_position == (2, 0):  # K
-            successors = [(1, 0), (2, 1)]
-            # F,L
-
-        elif empty_position == (2, 1):  # L
-            successors = [(2, 0), (1, 1), (2, 2)]
-            # K,G,M
-
-        elif empty_position == (2, 2):  # M
-            successors = [(2, 1), (1, 2), (2, 3)]
-            # L,H,N
-
-        elif empty_position == (2, 3):  # N
-            successors = [(2, 2), (1, 3), (2, 4)]
-            # M,I,O
-
-        elif empty_position == (2, 4):  # O
-            successors = [(2, 3), (1, 4)]
-            # N,J
+        successors.append((empty_position[0] -1,empty_position[1]))
+        successors.append((empty_position[0] + 1, empty_position[1]))
+        successors.append((empty_position[0] , empty_position[1]-1))
+        successors.append((empty_position[0] , empty_position[1]+1))
+        successors=[t for t in successors if t[0]>=0 and t[0]<=2 and t[1]>=0 and t[1]<=4]
+        # if empty_position == (0, 0):  # A
+        #     successors = [(1, 0), (0, 1)]
+        #     # F,B
+        #
+        # elif empty_position == (0, 1):  # B
+        #     successors = [(0, 0), (1, 1), (0, 2)]
+        #     # A,G,C
+        #
+        # elif empty_position == (0, 2):  # C
+        #     successors = [(0, 1), (1, 2), (0, 3)]
+        #     # B,H,D
+        #
+        # elif empty_position == (0, 3):  # D
+        #     successors = [(0, 2), (1, 3), (0, 4)]
+        #     # C,I,E
+        #
+        # elif empty_position == (0, 4):  # E
+        #     successors = [(0, 3), (1, 4)]
+        #     # D,J
+        #
+        # elif empty_position == (1, 0):  # F
+        #     successors = [(0, 0), (2, 0), (1, 1)]
+        #     # A,K,G
+        #
+        # elif empty_position == (1, 1):  # G
+        #     successors = [(0, 1), (1, 0), (1, 2), (2, 1)]
+        #     # F,B,L,H
+        #
+        # elif empty_position == (1, 2):  # H
+        #     successors = [(1, 1), (0, 2), (2, 2), (1, 3)]
+        #     # G,C,M,I
+        #
+        # elif empty_position == (1, 3):  # I
+        #     successors = [(1, 2), (0, 3), (2, 3), (1, 4)]
+        #     # H,D,N,J
+        #
+        # elif empty_position == (1, 4):  # J
+        #     successors = [(1, 3), (0, 4), (2, 4)]
+        #     # I,E,O
+        #
+        # elif empty_position == (2, 0):  # K
+        #     successors = [(1, 0), (2, 1)]
+        #     # F,L
+        #
+        # elif empty_position == (2, 1):  # L
+        #     successors = [(2, 0), (1, 1), (2, 2)]
+        #     # K,G,M
+        #
+        # elif empty_position == (2, 2):  # M
+        #     successors = [(2, 1), (1, 2), (2, 3)]
+        #     # L,H,N
+        #
+        # elif empty_position == (2, 3):  # N
+        #     successors = [(2, 2), (1, 3), (2, 4)]
+        #     # M,I,O
+        #
+        # elif empty_position == (2, 4):  # O
+        #     successors = [(2, 3), (1, 4)]
+        #     # N,J
 
         return successors
 

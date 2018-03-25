@@ -134,8 +134,9 @@ for string in gameStrings:
                     start =datetime.now()
 
                     automatic_moves=state_space_tree.find_goal_state()
-                    render(state_space_tree)
+
                     stop = datetime .now()
+                    render(state_space_tree)
                     with open("output.txt", "a") as f:
                         print("Solution ",end="[")
                         for m in automatic_moves:
