@@ -38,9 +38,9 @@ class StateSpaceTree():
             # If no goal state is reached by 20 moves, take the next node from the open list
 
             open_list = open_list + [n for i,n in enumerate(current_node.children)]
-            open_list.sort(key=lambda n: n.h, reverse=False)
-            current_node = open_list[0]
-            open_list.pop(0)
+            open_list.sort(key=lambda n: n.h, reverse=True)
+            current_node = open_list[len(open_list)-1]
+            open_list.pop()
             explored_gameboards[str(current_node.gameboard.board)]=len(current_node.past_moves)
         return current_node.past_moves
 
@@ -59,6 +59,7 @@ class StateSpaceTree():
         return h
 
 class Node():
+
     def __init__(self,gameboard,children=None,move=None,h=float('inf')):
         # had to do it this way because python==wierd
         if children is None:

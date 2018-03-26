@@ -2,7 +2,8 @@
 # MAIN DRIVER
 ###########################################################################
 from datetime import datetime
-from application.graph_render import render
+import pyximport; pyximport.install()
+#from application.graph_render import render
 import ast  # used to convert str to tuple
 import string
 from application.GameBoard import GameBoard
@@ -85,6 +86,8 @@ file.detach()
 
 # Start running games
 gameNum = 0
+automatic_mode_all = False
+
 for string in gameStrings:
     gameNum += 1
 
@@ -127,17 +130,19 @@ for string in gameStrings:
                 nextMove=automatic_moves.pop(0)
                 print("automatic move chose: ",position_map_reverse[nextMove])
             else:
-                nextMove=input()
-                if nextMove=='auto':
+                nextMove='auto all' if automatic_mode_all else input()
+                if 'auto' in nextMove:
                     automatic_mode=True
+                    if nextMove=='auto all':
+                        automatic_mode_all=True
                     state_space_tree = StateSpaceTree(g)
                     start =datetime.now()
 
                     automatic_moves=state_space_tree.find_goal_state()
 
                     stop = datetime .now()
-                    render(state_space_tree)
-                    with open("output.txt", "a") as f:
+                    #render(state_space_tree)
+                    with open("output_c.txt", "a") as f:
                         print("Solution ",end="[")
                         for m in automatic_moves:
                             f.write("%s " % position_map_reverse[m])
@@ -180,6 +185,6 @@ for string in gameStrings:
 
     print("CONGRATULATIONS! YOU HAVE WON THE GAME! EUREKA! FELICITATIONS! HAPPY BIRTHDAY!")
     print("Press any key to continue")
-    input()
+    input() if not automatic_mode_all else None
 
 # end [for string in gameStrings]
