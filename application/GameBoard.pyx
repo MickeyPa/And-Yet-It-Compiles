@@ -20,13 +20,22 @@ class GameBoard:
     position_map = {a: b for a, b in
                     zip([s for s in string.ascii_uppercase[0:24]], [(i, j) for i in range(0, 3) for j in range(0, 5)])}
 
-    def __init__(self,board_string=None,level=1):
+    def __init__(self,board_string=None,level=1,board=None,board_state_helper=None):
+        if board is not None:
+            self.board=[[],[],[]]
+            self.board_state_helper=[[],[],[]]
+            self.board[0]=board[0][:]
+            self.board[1]=board[1][:]
+            self.board[2]=board[2][:]
+            self.board_state_helper[0]=board_state_helper[0][:]
+            self.board_state_helper[1]=board_state_helper[1][:]
+            self.board_state_helper[2]=board_state_helper[2][:]
+
         #if no string is provided, get random string
-        if board_string is None:
-            board_string=self.randomize_board_string(level)
-
-
-        self.__create_board_from_string(board_string)
+        else:
+            if board_string is None:
+                board_string=self.randomize_board_string(level)
+            self.__create_board_from_string(board_string)
 
 
 

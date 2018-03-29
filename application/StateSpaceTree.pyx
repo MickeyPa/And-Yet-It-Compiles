@@ -1,10 +1,11 @@
-import copy
 import random
 import string
+from application.GameBoard import GameBoard
 
-class StateSpaceTree():
+cdef class StateSpaceTree():
+    cdef public object start_node
     def __init__(self, gameboard):
-        self.start_node=Node(copy.deepcopy(gameboard))
+        self.start_node=Node(GameBoard(board=gameboard.board,board_state_helper=gameboard.board_state_helper))
 
     def find_goal_state(self):
 
@@ -18,12 +19,13 @@ class StateSpaceTree():
             if current_node.children==[]:
                 moves=current_node.gameboard.successors()
                 for move in moves:
-                    next_gameboard=copy.deepcopy(current_node.gameboard)
+                    next_gameboard=GameBoard(board=current_node.gameboard.board,board_state_helper=current_node.gameboard.board_state_helper)
+
                     next_gameboard.move(move)
                     #Ignore states that have already been traversed
                     if not str(next_gameboard.board) in explored_gameboards:
                         n = Node(next_gameboard, move=current_node.past_moves + [move],
-                                 h=self.evaluate_node_heuristic(next_gameboard)+(len(current_node.past_moves + [move])*0.4))
+                                 h=self.evaluate_node_heuristic(next_gameboard)+(len(current_node.past_moves + [move])*0.2))
                         current_node.add_child(n)
                     elif len(current_node.past_moves+[move])<explored_gameboards[str(next_gameboard.board)]:
                         n=Node(next_gameboard,move=current_node.past_moves+[move],h=self.evaluate_node_heuristic(next_gameboard))
@@ -44,8 +46,8 @@ class StateSpaceTree():
             explored_gameboards[str(current_node.gameboard.board)]=len(current_node.past_moves)
         return current_node.past_moves
 
-    def evaluate_node_heuristic(self, game_board):
-        h = 0
+    cdef double evaluate_node_heuristic(self, game_board):
+        cdef double h = 0
         row_1 = game_board.board[0]
         row_2 = game_board.board[1]
         row_2 = game_board.board[2]
@@ -58,7 +60,11 @@ class StateSpaceTree():
             h += distance
         return h
 
-class Node():
+cdef class Node():
+    cdef public double h
+    cdef public object gameboard
+    cdef public object children
+    cdef public object past_moves
 
     def __init__(self,gameboard,children=None,move=None,h=float('inf')):
         # had to do it this way because python==wierd
