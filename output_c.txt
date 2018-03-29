@@ -1,0 +1,20 @@
+E D I N M L G B C H G F K L G F A B G H M L G B C H M N I H G F K L M N I D E J O N I H M N I J E D I 
+1086ms 
+M H I D E J O N M L K F G H I N M H G L M N I H G F K L M H G B C D I N M H I J O N M H 
+191ms 
+K F A B G L M H I N M H G F A B C H I J E D C H I J O N M H G F K L G B C H 
+96ms 
+E D I N O J I D C H G L M N I D C H G L M H G F K L M H G L M N I D C H I N M H 
+309ms 
+I H G L M H G F K L G F A B C H G L M N I J O N I J E D C H M N I H M N I 
+118ms 
+L G F A B C H G F K L G F A B C H G L M H I J E D C H I J E D C H 
+115ms 
+N M L G B C H G F A B C H I J O N I J E D C B G H M L G 
+12ms 
+M L G B C H I N M H G F A B C H I J O N M H I J E D C B A F G H M L G F K L M H 
+186ms 
+O J I H M L G F K L G B C H G B C D I N M H I J O N M H 
+6ms 
+H M L G B C H I N M H G F A B C H I J E D I J O N M H I D C H G F K L M H 
+112ms 

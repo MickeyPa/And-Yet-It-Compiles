@@ -1,0 +1,60 @@
+I N M H G F K L G 
+4ms 
+C H I N M H I J O N M L G 
+48ms 
+F K L G H I J O N I 
+3ms 
+N M H G F K L M N I H M L G 
+14ms 
+B C D I J O N I 
+18ms 
+B C H I N M H I J O N M L G 
+10ms 
+G F K L G B A F G L M H I J O N M H 
+31ms 
+J I H C B G L K F G H M N O J I H G L M N I 
+54ms 
+L M H I D E J I N M H 
+19ms 
+I D E J I N O J E D I H G B A F G L M H 
+41ms 
+F G H I N M L G H I J O N I H M N I 
+478ms 
+L M H C D E J I N M L K F A B G F K L G 
+1034ms 
+K L M H I D E J I N M L G H I J O N M H 
+354ms 
+F G H C B G H I J E D I N O J I H M N I J O N M H 
+41ms 
+J I N M H C D I H G F K L M H 
+4ms 
+L G B C D I J O N I 
+79ms 
+O N I J O N M L G F K L M H 
+7ms 
+N O J E D C B A F K L G F A B G L M H 
+86ms 
+N I J E D C B G H I D C H 
+304ms 
+J I N M L K F G B C H G L M H 
+43ms 
+J O N M H G L M H G F K L G B C D E J O N I J E D I 
+2514ms 
+F G H C D I N M H C D I J E D C H G F A B C H G L M H 
+451ms 
+H G B A F G B C H M L G H I J O N I J E D I H M N I 
+97ms 
+G L K F A B C H I N M H C D I H M N I 
+189ms 
+L G H C D E J I H M N I H M L K F A B C H I J O N M H 
+12687ms 
+M N I H G B C D I H G F A B C D I N M H I J E D C H G L K F A B G F K L G 
+46600ms 
+H I D C B G F K L G H M N I J E D I 
+44ms 
+M N O J I D C B G H M L K F 
+80ms 
+K L M N I D C B A F G L M N I J O N M H G B C H 
+243ms 
+C D E J I N M L K F A B G H M L K F 
+129ms 
